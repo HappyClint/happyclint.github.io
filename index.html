@@ -183,7 +183,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -197,7 +197,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/" class="post-title-link" itemprop="url">开始使用ubuntu</a>
+            <a href="/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/" class="post-title-link" itemprop="url">多进程、多线程、协程解压文件速度对比</a>
         </h2>
 
         <div class="post-meta">
@@ -207,14 +207,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-04-27 23:21:12" itemprop="dateCreated datePublished" datetime="2020-04-27T23:21:12+08:00">2020-04-27</time>
+              <time title="创建时间：2020-04-28 02:40:51" itemprop="dateCreated datePublished" datetime="2020-04-28T02:40:51+08:00">2020-04-28</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-17 21:08:43" itemprop="dateModified" datetime="2020-04-17T21:08:43+08:00">2020-04-17</time>
+                <time title="修改时间：2020-04-20 17:58:53" itemprop="dateModified" datetime="2020-04-20T17:58:53+08:00">2020-04-20</time>
               </span>
 
           
@@ -228,60 +228,68 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1><span id="开始使用ubuntu">开始使用ubuntu</span></h1><h2><span id="1环境准备">1.环境准备</span></h2><p>安装ubuntu,安装常用软件，配置网络，修复问题等</p>
-<h3><span id="11安装ubuntu">1.1安装ubuntu</span></h3><p>推荐安装ubuntu19.04，安装时不选择更新。 设置启动选择时间为0</p>
-<p><code>sudo vim /boot/grub/grub.cfg</code> 设置timeout=30 =&gt; 0</p>
-<h3><span id="12-安装常用软件">1.2 安装常用软件</span></h3><h4><span id="a安装搜狗输入法">a.安装搜狗输入法</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install fcitx-table-wbpy fcitx-config-gtk</span><br><span class="line">im-config -n fcitx</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br><span class="line">sudo apt-get install -f</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br></pre></td></tr></table></figure>
+          <h3><span id="python单线程-多进程-多线程-协程文件写入性能测试">python单线程、多进程、多线程、协程文件写入性能测试</span></h3><p>在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。</p>
+<h4><span id="单线程版">单线程版</span></h4><p>两种数字补全0的方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(str(x).zfill(2))</span><br><span class="line">print(&#39;%02d&#39;%x)</span><br></pre></td></tr></table></figure>
 
-<p>解决输入法输入英语字符变宽问题，解决如下：将全改为半即可。</p>
-<p><img src="https://cqep.net:88/s/7HBPbkFSjQkMxs2/preview" alt></p>
-<h4><span id="b-优化桌面">b .优化桌面</span></h4><p>安装优化软件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
-
-<p>使用firefox访问 <code>https://extensions.gnome.org/</code> 根据提示安装插件，然后安装两个插件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dash to dock</span><br><span class="line">hide top bar</span><br></pre></td></tr></table></figure>
-
-<h4><span id="c-user-themes设置">c. user themes设置</span></h4><p>在优化里设置user themes 开启 <strong>安装shell Flat Remix</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:daniruiz&#x2F;flat-remix</span><br><span class="line">sudo apt-get install flat-remix</span><br><span class="line">sudo apt-get install flat-remix-gnome</span><br></pre></td></tr></table></figure>
-
-<p><strong>安装图标</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:papirus&#x2F;papirus</span><br><span class="line">sudo apt install papirus-icon-theme</span><br></pre></td></tr></table></figure>
-
-<p>最后在优化中设置主题和图标</p>
-<h4><span id="d-安装wps">d. 安装wps</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo cp  * &#x2F;usr&#x2F;share&#x2F;fonts&#x2F;win10</span><br><span class="line"># 生成字体索引信息</span><br><span class="line">sudo mkfontscale</span><br><span class="line">sudo mkfontdir</span><br><span class="line"># 更新字体缓存</span><br><span class="line">sudo fc-cache</span><br><span class="line">sudo dpkg -i wps-office_11.1.0.8372_amd64.deb</span><br><span class="line">sudo mv wps_symbol_fonts &#x2F;usr&#x2F;share&#x2F;fonts&#x2F; #移动到fonts文件夹</span><br></pre></td></tr></table></figure>
-
-<h4><span id="e安装视频播放器vlc-截图软件shutter">e.安装视频播放器vlc、截图软件shutter</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install vlc</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></table></figure>
-
-<h3><span id="3升级安装游戏下载软件">3.升级安装游戏，下载软件</span></h3><h4><span id="安装ugetaria2">安装uget+aria2</span></h4><p>1.安装aira2</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install aria2</span><br></pre></td></tr></table></figure>
-
-<p>2.安装及配置uget</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install uget</span><br></pre></td></tr></table></figure>
-
-<p>3.chrome安装插件uGet Integration 4.系统也要安装uget-integrator</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:uget-team&#x2F;ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install uget-integrator</span><br></pre></td></tr></table></figure>
-
-<h4><span id="4其他">4.其他</span></h4><ul>
-<li><p>翻墙</p>
-<p>这里使用v2ray,和图形化界面Qv2ray。见nextcloud。</p>
-<p>ufw地址，<a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt" target="_blank" rel="noopener">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</a></p>
-</li>
-<li><p>系统备份</p>
-<p>ubuntu系统镜像软件 systemback，<a href="https://ywnz.com/linuxjc/3877.html" target="_blank" rel="noopener">https://ywnz.com/linuxjc/3877.html</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository &quot;deb http:&#x2F;&#x2F;ppa.launchpad.net&#x2F;nemh&#x2F;systemback&#x2F;ubuntu xenial main&quot;</span><br><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys </span><br><span class="line">382003C2C8B7B4AB813E915B14E4942973C62A1B</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install systemback</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装picgo</p>
-<p>下载最新版本<a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">picgo</a>,安装nodejs和npm、xclip</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install nodejs</span><br><span class="line">sudo apt install npm</span><br><span class="line">sudo apt install xclip</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>开机启动</p>
-<p>gnome-session-properties,配置开机启动项目</p>
-<p><img src="https://cqep.net:88/s/bjbdQAon7irfsGq/preview" alt></p>
-<p>ubuntu做windows镜像</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard&#x2F;webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get woeusb</span><br></pre></td></tr></table></figure>
-
+<p><img src="https://cqep.net:88/s/bg2pb34rSL9P7xz/preview" alt></p>
+<p>文件读写</p>
+<table>
+<thead>
+<tr>
+<th>访问模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r (read)</td>
+<td>只读模式,不能写（文件必须存在，不存在会报错）</td>
+</tr>
+<tr>
+<td>w (write)</td>
+<td>只写模式,不能读（文件存在则会被覆盖内容（要千万注意），文件不存在则创建）</td>
+</tr>
+<tr>
+<td>a (append)</td>
+<td>追加模式,不能读</td>
+</tr>
+<tr>
+<td>r+</td>
+<td>读写模式</td>
+</tr>
+<tr>
+<td>w+</td>
+<td>写读模式</td>
+</tr>
+<tr>
+<td>a+</td>
+<td>追加读模式</td>
+</tr>
+<tr>
+<td>rb</td>
+<td>二进制读模式</td>
+</tr>
+<tr>
+<td>wb</td>
+<td>二进制写模式</td>
+</tr>
+<tr>
+<td>ab</td>
+<td>二进制追加模式</td>
+</tr>
+<tr>
+<td>rb+</td>
+<td>二进制读写模式</td>
+</tr>
+<tr>
+<td>wb+</td>
+<td>二进制写读模式</td>
+</tr>
+<tr>
+<td>ab+</td>
+<td>二进制追加读模式</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -300,7 +308,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -366,7 +374,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

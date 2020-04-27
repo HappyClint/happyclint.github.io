@@ -1,24 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2020/04/27/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3><span id="run-server">Run server</span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3><span id="generate-static-files">Generate static files</span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
     <title>wordpress搭建个人博客</title>
     <url>/2020/04/27/wordpress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
     <content><![CDATA[<h3><span id="wordpress搭建个人博客">wordpress搭建个人博客</span></h3><p>最近被封闭太无聊了，开始折腾些以前想折腾又没时间折腾的东西。折腾完之后发现可能对各网友有一定帮助，然后就有了这篇搭建个人博客。开始分享一些自己在折腾，和曾经折腾过的东西。</p>
@@ -230,7 +212,7 @@ location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:uget-team&#x2F;ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install uget-integrator</span><br></pre></td></tr></table></figure>
 
 <h4><span id="4其他">4.其他</span></h4><ul>
-<li><p>翻墙</p>
+<li><p>墙</p>
 <p>这里使用v2ray,和图形化界面Qv2ray。见nextcloud。</p>
 <p>ufw地址，<a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt" target="_blank" rel="noopener">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</a></p>
 </li>
@@ -250,6 +232,304 @@ location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard&#x2F;webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get woeusb</span><br></pre></td></tr></table></figure>
 
+]]></content>
+  </entry>
+  <entry>
+    <title>Git</title>
+    <url>/2020/04/28/Git/</url>
+    <content><![CDATA[<h3><span id="git">Git</span></h3><h4><span id="git是什么">git是什么</span></h4><p>git是分布式版本控制系统，简单来说就是可以记录你的每一次更改。</p>
+<ul>
+<li>集中式控制系统 有服务器，所有用户的资料需要从服务器下载，修改完后再上传。如cvs,svn,<strong>vss</strong>(正在用)</li>
+<li>分布式控制系统 每个用户手中都有完整的资料，可以通过服务器进行分享改动，没有服务器也可以正常运行。</li>
+</ul>
+<h4><span id="git安装">git安装</span></h4><p><a href="https://git-scm.com/download/" target="_blank" rel="noopener">下载地址</a>,配置如下：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="git使用">git使用</span></h4><ul>
+<li>在文件夹下输入<code>git init</code>创建git仓库</li>
+<li>git add file 添加修改</li>
+<li>git commit -m ‘说明’ 进行提交</li>
+<li>git diff 查看文件的更改</li>
+</ul>
+<h4><span id="git管理修改">git管理修改</span></h4><ul>
+<li>git reset –head HEAD^上一个版本</li>
+<li>git reset -head id 指定版本</li>
+<li>git reflog 操作日志  可以找到ID 并回退到之后版本。</li>
+</ul>
+<h4><span id="撤销修改">撤销修改</span></h4><ul>
+<li><p>场景1：当你改乱了工作区某个文件的内容，想直接丢弃工作区的修改时，用命令<code>git checkout -- file</code>。</p>
+<p>场景2：当你不但改乱了工作区某个文件的内容，还添加到了暂存区时，想丢弃修改，分两步，第一步用命令<code>git reset HEAD</code>，就回到了场景1，第二步按场景1操作。</p>
+</li>
+</ul>
+<h4><span id="删除">删除</span></h4><ul>
+<li>git rm 文件 移除文件 然后提交</li>
+</ul>
+<h4><span id="添加远程仓库">添加远程仓库</span></h4><p>生成公钥和私钥，将公钥传到github</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br></pre></td></tr></table></figure>
+
+<h4><span id="连接到远程仓库">连接到远程仓库</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">第一次运行</span><br><span class="line">git remote add origin git@server-name:path&#x2F;repo-name.git</span><br><span class="line">git push -u origin master</span><br><span class="line">#以后同步</span><br><span class="line">git push origin master</span><br><span class="line">#删除远程连接</span><br><span class="line">git remote origin</span><br></pre></td></tr></table></figure>
+
+<h4><span id="git分支">git分支</span></h4><ul>
+<li><p>查看分支：<code>git branch</code></p>
+<p>创建分支：<code>git branch</code></p>
+<p>切换分支：<code>git checkout</code>或者<code>git switch</code></p>
+<p>创建+切换分支：<code>git checkout -b</code>或者<code>git switch -c</code></p>
+<p>合并某分支到当前分支：<code>git merge</code></p>
+<p>删除分支：<code>git branch</code></p>
+<p>用<code>git log --graph</code>命令可以看到分支合并图。</p>
+<p>合并分支时，加上<code>--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而<code>fast forward</code>合并就看不出来曾经做过合并。</p>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>JavaScript入门</title>
+    <url>/2020/04/28/JavaScript%E5%85%A5%E9%97%A8/</url>
+    <content><![CDATA[<h3><span id="javascript入门">JavaScript入门</span></h3><p>####　快速入门</p>
+<ol>
+<li><p>JavaScipt可以放在网页的任何地方，不过通常放在<head>里，用<script>框起来一般看起来像这种：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    alert(<span class="string">'Hello, world'</span>);</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种是引入一个写好的js文件</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/static/js/abc.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样做的好处是多个页面可以引用同一个js文件，很方便。</p>
+</li>
+<li><p>调试</p>
+<p>谷歌浏览器使用调试（F12）,在console中可以执行js命令。如图所示：</p>
+<p><img src="https://cqep.net:88/s/8Pez4TjTP9XJDss/preview" alt=""></p>
+</li>
+</ol>
+<h4 id="JavaScript语法"><a href="#JavaScript语法" class="headerlink" title="JavaScript语法"></a>JavaScript语法</h4><ol>
+<li><p>约定俗成的一些用法</p>
+<ul>
+<li>每句以;结尾</li>
+<li>语句块用{...}</li>
+<li>缩进使用4个空格</li>
+</ul>
+</li>
+<li><p>注释</p>
+<ul>
+<li><p>使用 //注释一行</p>
+</li>
+<li><p>使用<code>/*...*/</code>注释多行</p>
+</li>
+</ul>
+</li>
+</ol>
+</script></head></p></li></ol>]]></content>
+  </entry>
+  <entry>
+    <title>Hexo+Next主题安装配置</title>
+    <url>/2020/04/28/Hexo+Next%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</url>
+    <content><![CDATA[<h3><span id="hexonext主题安装配置">Hexo+Next主题安装配置</span></h3><p>之前一直用wordpress，但是对于我这种轻度使用者来说wordpress过于臃肿和复杂，然后发现了Hexo,就被这种简洁的风格所吸引，正式开始使用Hexo。</p>
+<h4><span id="安装hexo">安装Hexo</span></h4><ol>
+<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgit-scm.com%2Fdownload%2Fwin" target="_blank" rel="noopener">安装git</a></p>
+</li>
+<li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fnodejs.org%2Fen%2F" target="_blank" rel="noopener">安装nodejs</a></p>
+</li>
+<li><p>安装Hexo,在git命令行里输入一下命令安装:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">cd 你的文件夹</span><br><span class="line">hexo init hexo 初始化hexo文件夹，不存在时会自动创建</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>到这里hexo就已经安装完成,运行本地服务器。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>然后可以通过127.0.0.1:4000进行访问。</p>
+<h4><span id="使用next主题">使用Next主题</span></h4><p>Hexo内置的主题过于简洁，并且功能也太少。推荐使用<a href="https://theme-next.org/next-7-7-2-released/" target="_blank" rel="noopener">Next主题</a>。</p>
+<ol>
+<li><p>安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd hexo #进入hexo文件夹</span><br><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;hexo-theme-next themes&#x2F;next</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置主配置文件(根目录下的_config.yml)</p>
+<ul>
+<li><p>配置站点名称，作者，语言等信息。如图：<img src="https://cqep.net:88/s/fLcP2ZD8WBxyxPn/preview" alt></p>
+</li>
+<li><p>配置主页显示文章数</p>
+<p>per_page为主页文章数，这里设置为1</p>
+<p>order_by为排序方式，设置为时间排序</p>
+<p><img src="https://cqep.net:88/s/8JNLz4C6tj6z37R/preview" alt></p>
+</li>
+</ul>
+</li>
+<li><p>配置主题配置文件（主题下的_config.yml）</p>
+<ul>
+<li><p>设置风格，我这里选择的是Mist</p>
+<p><img src="https://cqep.net:88/s/CYodMK5QCALAPPM/preview" alt></p>
+</li>
+<li><p>增加标签和分类栏</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hexo new page &quot;tags&quot;</span><br><span class="line">hexo new page &quot;categories&quot;</span><br></pre></td></tr></table></figure>
+
+<p>然后编辑tags文件夹下的index.md文件，categories一样操作。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2017-07-10 16:36:26</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>增加本地搜索</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>编辑 主配置文件，新增以下内容到任意位置</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">search:</span><br><span class="line">path: search.xml</span><br><span class="line">field: post</span><br><span class="line">format: html</span><br><span class="line">limit: 10000</span><br></pre></td></tr></table></figure>
+
+<p>编辑 主题配置文件，启用本地搜索功能：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Local search</span><br><span class="line">local_search:</span><br><span class="line">enable: true</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除页脚由。。。q强力驱动,注释掉这一句,如图:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;%- if theme.footer.powered %&#125;</span><br><span class="line">  &lt;div class&#x3D;&quot;powered-by&quot;&gt;</span><br><span class="line">    &#123;%- set next_site &#x3D; &#39;https:&#x2F;&#x2F;theme-next.org&#39; %&#125;</span><br><span class="line">    &#123;%- if theme.scheme !&#x3D;&#x3D; &#39;Gemini&#39; %&#125;</span><br><span class="line">      &#123;%- set next_site &#x3D; &#39;https:&#x2F;&#x2F;&#39; + theme.scheme | lower + &#39;.theme-next.org&#39; %&#125;</span><br><span class="line">    &#123;%- endif %&#125;</span><br><span class="line">    &#123;&#123;- __(&#39;footer.powered&#39;, next_url(&#39;https:&#x2F;&#x2F;hexo.io&#39;, &#39;Hexo&#39;, &#123;class: &#39;theme-link&#39;&#125;) + &#39; &amp; &#39; + next_url(next_site, &#39;NexT.&#39; + theme.scheme, &#123;class: &#39;theme-link&#39;&#125;)) &#125;&#125;</span><br><span class="line">  &lt;&#x2F;div&gt;</span><br><span class="line">&#123;%- endif %&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cqep.net:88/s/LEDoGDobopntB2d/preview" alt></p>
+</li>
+<li><p>统计访问人数：</p>
+<p><img src="https://cqep.net:88/s/bkHtTsJTfkRkYda/preview" alt></p>
+<p>目前数据不准确，不知道部署到网站会不会这样。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h4><span id="连接到github">连接到github</span></h4><p>仓库名称必须为 name.github.io</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: &#39;git&#39;</span><br><span class="line">  repository: https:&#x2F;&#x2F;github.com&#x2F;HappyClint&#x2F;happyclint.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>Markdown编辑器同步</title>
+    <url>/2020/04/28/Markdown%E7%BC%96%E8%BE%91%E5%99%A8%E5%90%8C%E6%AD%A5/</url>
+    <content><![CDATA[<h2><span id="1-提提需求">1、提提需求</span></h2><p>其实就是说说自己遇到的情况。自己并非一个专业的博主或Steemer之类的，自己的写作都是用碎片化的时候进行了，所以就有了这样的特殊要求。</p>
+<ul>
+<li><p>公司电脑上有时会写上几句</p>
+</li>
+<li><p>写了没几句就开会去了，或回家等车时间，手机上会写上几句</p>
+</li>
+<li><p>回家后又有两台电脑，不知会有哪台上写</p>
+</li>
+</ul>
+<p>其实说白了就是打通Android+Windows平台。</p>
+<p><strong>注：本文使用的方法中Typora支持Linux和Mac，坚果云全平台支持，易码只支持Android。</strong></p>
+<h2><span id="2-完美的markdown编辑器typora">2、完美的Markdown编辑器：Typora</span></h2><p>之前其实也用过一种解决方案，也基本可行。但是就是桌面版的编辑器和Typora的体验相差太远了，不得不放弃了。</p>
+<p>Typora真是最好用的Markdown编辑器，对我来说没有之一。具体使用方法我就不细说了，可以参照：[给大家推荐一款无可挑剔的 Markdown 编辑器]。</p>
+<p>补充一点自己发现的一个小功能，添加本地图片的功能：</p>
+<p><img src="assets/1571326204804.png" alt="1571326204804"> 为了就合这个编辑器，所以才想办法打通手机和桌面。</p>
+<h2><span id="3-无可挑剔的手机markdown笔记本易码">3、无可挑剔的手机Markdown笔记本：易码</span></h2><p>可能由于这个软件并没有大公司的推广，所以大家知道的并不多，但实际上这个软件的好用性真的好上天了！！！</p>
+<p>现在的感觉是体验比Typora丝毫不差，而且有几点做的比Typora还好（当然，由于手机的功能限制，也有很多功能不如Typora）。</p>
+<ol>
+<li><p>云同步功能</p>
+<p>易码本身没有云服务器，但他非常开放，给大家来一个截图感受一个: <img src="assets/1571327047559_3a2b64d05ce90b4c6d362339a6c3c108.jpg" alt="A123456.jpg"> 我相信他还在持续的改进当中。</p>
+</li>
+<li><p>图片插入功能</p>
+<p>图片插入功能也和Typora一样好用。在我现在用过的所有的Markdown编辑器中，图片插入都是只插入一个特定的代码，要自己来填写图片名称和图片路径的，而只有易码不是这样做的。在易码中，可以像Word那样选择图片，然后图片会复制到相应的文件夹中。</p>
+<p>使用方法和上面的Typora相同。</p>
+<hr>
+<p>注：本文写的一半的时候发现Typora也有这个功能。</p>
+<h2><span id="4-非常不错的文档同步服务器坚果云">4、非常不错的文档同步服务器：坚果云</span></h2><p>大家很容易就能说出不少非常好用的文档同步服务器。但我作为一个非翻墙爱好者，觉得只有坚果云是最好用的。</p>
+<p>像Dropbox是非常好用+管用，但无奈国内很不和啊，像什么Google Drive就更不用说了。除了这些之外，一般都是需要使用他们的客户端的，像坚果云这样支持WebDev的很少。</p>
+<p>免费的坚果云每月只有1G的上传流量和3G的下载流量。是很少，但对于写作来说非常足够了。</p>
+<p>两方的设置都很简单，电脑上直接安装他的客户端就可以了，这样就能几乎实时同步了。 <img src="assets/1518309369493_3294bb15bbd6e9d975d9d77f3196cd66.gif" alt="1518309369493_3294bb15bbd6e9d975d9d77f3196cd66.gif"></p>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title>python生成器的再学习</title>
+    <url>/2020/04/28/python%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h4><span id="python生成器的再学习">python生成器的再学习</span></h4><p>普通的斐波拉契函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        print b</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">    return &#39;done&#39;</span><br></pre></td></tr></table></figure>
+
+<p>改成生成器generator形式只需将print改为yield.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(max)</span>:</span></span><br><span class="line">    n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; max:</span><br><span class="line">        <span class="keyword">yield</span> b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'done'</span></span><br></pre></td></tr></table></figure>
+
+<p>然后输出方面，可以直接next进行输出，如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = fib(<span class="number">10</span>)</span><br><span class="line">next(f)</span><br><span class="line">next(f)</span><br></pre></td></tr></table></figure>
+
+<p>或者使用for循环：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = fib(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> f :</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+
+<h4><span id="生产者消费者的协程解法">生产者消费者的协程解法</span></h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">()</span>:</span></span><br><span class="line">    r = <span class="string">''</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        n = <span class="keyword">yield</span> r</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> n:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        print(<span class="string">'[CONSUMER] Consuming %s...'</span> % n)</span><br><span class="line">        r = <span class="string">'200 OK'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">produce</span><span class="params">(c)</span>:</span></span><br><span class="line">    c.send(<span class="literal">None</span>)<span class="comment">#相当于next(),必须先执行</span></span><br><span class="line">    n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; <span class="number">5</span>:</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">        print(<span class="string">'[PRODUCER] Producing %s...'</span> % n)</span><br><span class="line">        r = c.send(n)<span class="comment">#将N的值传到consumer的n值，并将r值回传</span></span><br><span class="line">        print(<span class="string">'[PRODUCER] Consumer return: %s'</span> % r)</span><br><span class="line">    c.close()</span><br><span class="line"></span><br><span class="line">c = consumer()</span><br><span class="line">produce(c)</span><br></pre></td></tr></table></figure>
+
+<p><code>yield</code>在生成器中有中断的功能，可以传出值，也可以从函数外部接收值</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>markdown使用</title>
+    <url>/2020/04/28/markdown%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h1><span id="markdown使用">markdown使用</span></h1><h3><span id="1标题">1.标题</span></h3><h1><span id="一级标题">一级标题</span></h1><h2><span id="二级标题">二级标题</span></h2><h3><span id="三级标题">三级标题</span></h3><h4><span id="四级标题">四级标题</span></h4><h5><span id="五级标题">五级标题</span></h5><h2><span id="2缩进">2.缩进</span></h2><p>未缩进</p>
+<p> 空格缩进四分之一格</p>
+<p>​    tab缩进1格</p>
+<h2><span id="3代码块">3.代码块</span></h2><p>未使用代码块</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">使用代码块</span><br><span class="line">print(<span class="string">'hello'</span>)</span><br><span class="line">还可以选择语言</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">快捷键 ctrl+shift+k</span><br></pre></td></tr></table></figure>
+
+
+<h2><span id="4图片插入">4.图片插入</span></h2><p>ctrl+shift+I</p>
+<p><img src alt></p>
+<h2><span id="5序号">5.序号</span></h2><p>1.数字标号</p>
+<p>a.字母标号</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>多进程、多线程、协程解压文件速度对比</title>
+    <url>/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/</url>
+    <content><![CDATA[<h3><span id="python单线程-多进程-多线程-协程文件写入性能测试">python单线程、多进程、多线程、协程文件写入性能测试</span></h3><p>在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。</p>
+<h4><span id="单线程版">单线程版</span></h4><p>两种数字补全0的方法</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(str(x).zfill(2))</span><br><span class="line">print(&#39;%02d&#39;%x)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cqep.net:88/s/bg2pb34rSL9P7xz/preview" alt></p>
+<p>文件读写</p>
+<table>
+<thead>
+<tr>
+<th>访问模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r (read)</td>
+<td>只读模式,不能写（文件必须存在，不存在会报错）</td>
+</tr>
+<tr>
+<td>w (write)</td>
+<td>只写模式,不能读（文件存在则会被覆盖内容（要千万注意），文件不存在则创建）</td>
+</tr>
+<tr>
+<td>a (append)</td>
+<td>追加模式,不能读</td>
+</tr>
+<tr>
+<td>r+</td>
+<td>读写模式</td>
+</tr>
+<tr>
+<td>w+</td>
+<td>写读模式</td>
+</tr>
+<tr>
+<td>a+</td>
+<td>追加读模式</td>
+</tr>
+<tr>
+<td>rb</td>
+<td>二进制读模式</td>
+</tr>
+<tr>
+<td>wb</td>
+<td>二进制写模式</td>
+</tr>
+<tr>
+<td>ab</td>
+<td>二进制追加模式</td>
+</tr>
+<tr>
+<td>rb+</td>
+<td>二进制读写模式</td>
+</tr>
+<tr>
+<td>wb+</td>
+<td>二进制写读模式</td>
+</tr>
+<tr>
+<td>ab+</td>
+<td>二进制追加读模式</td>
+</tr>
+</tbody></table>
 ]]></content>
   </entry>
 </search>
