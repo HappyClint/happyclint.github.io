@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/04/27/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3><span id="run-server">Run server</span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3><span id="generate-static-files">Generate static files</span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>wordpress搭建个人博客</title>
+    <url>/2020/04/27/wordpress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<h3><span id="wordpress搭建个人博客">wordpress搭建个人博客</span></h3><p>最近被封闭太无聊了，开始折腾些以前想折腾又没时间折腾的东西。折腾完之后发现可能对各网友有一定帮助，然后就有了这篇搭建个人博客。开始分享一些自己在折腾，和曾经折腾过的东西。</p>
+<h4><span id="一-选择博客平台">一、选择博客平台</span></h4><p>看了下现在比较火的一些平台，比如简书、知乎、CSDN等等，个人感觉界面过于复杂，很不适合我这种小白上手，主要是复杂的界面看着自己也很心烦。然后就百度了一下找到了wordpress.com，界面我还挺喜欢，但是每月至少需要4块钱，觉得完全每月必要，正好之前买了华为云的云主机，干脆就自己搭建得了。</p>
+<h4><span id="二-在华为云上安装wordpress">二、在华为云上安装wordpress</span></h4><p>1.安装docker</p>
+<p>使用docker安装简单，并且随时可以启停，相当方便。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">yum-config-manager --add-repo https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br><span class="line">yum install docker-ce</span><br><span class="line"># 启动Docker</span><br><span class="line">systemctl start docker</span><br><span class="line">#测试运行 hello-world</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>2.安装mysql</p>
+<p>wordpress部署需要msql，这里同样用docker进行安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 安装，其中passwd是你root账户的密码</span><br><span class="line">docker run --name&#x3D;nextcloud_db -e MYSQL_ROOT_PASSWORD&#x3D;passwd -d mysql:5</span><br><span class="line"># 创建数据库</span><br><span class="line">docker exec -it nextcloud_db mysql -u root -p</span><br><span class="line">passwd: passwd</span><br><span class="line">mysql&gt; CREATE DATABASE wordpress;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure>
+
+<p>3.安装wordpress</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 82为你对外的服务器端口，nextcloud_db就是我们创建的mysql容器在wordpress里可以通过db访问</span><br><span class="line">docker run --name my-wordpress --link nextcloud_db:db -p 82:80 -d wordpress</span><br></pre></td></tr></table></figure>
+
+<p>4.设置wordpress</p>
+<ul>
+<li><p>选择语言，中文</p>
+<p><img src="https://cqep.net:88/s/EgAQNeMNjBsikNF/preview" alt="img"></p>
+</li>
+<li><p>配置数据库信息，passwd为你的数据库密码</p>
+<p><img src="https://cqep.net:88/s/ScDarbNXRPKRXYq/preview" alt="img"></p>
+</li>
+</ul>
+<h4><span id="三-wordpress优化">三、wordpress优化</span></h4><ul>
+<li><p>最后根据个人喜好进行wordpress页面的一些优化，选择主题，安装插件等。</p>
+<p><img src="https://cqep.net:88/s/YFz7YpoBS3qrCd5/preview" alt="img"></p>
+</li>
+<li><p>$_SERVER[‘HTTPS’] = ‘on’;</p>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>Nextcloud nginx https设置</title>
+    <url>/2020/04/27/Nextcloud%20nginx%20https%E8%AE%BE%E7%BD%AE/</url>
+    <content><![CDATA[<p>upstream php-handler {<br>    server 127.0.0.1:9000;<br>    #server unix:/var/run/php/php7.2-fpm.sock;<br>}</p>
+<p>server {<br>    listen 80;<br>    listen [::]:80;<br>    server_name cqep.net;<br>    # enforce https<br>​    return 301 https://$server_name:443$request_uri;<br>}</p>
+<p>server {<br>    listen 443 ssl http2;<br>    listen [::]:443 ssl http2;<br>    server_name cqep.net;</p>
+<pre><code># Use Mozilla&apos;s guidelines for SSL/TLS settings
+# https://mozilla.github.io/server-side-tls/ssl-config-generator/
+# NOTE: some settings below might be redundant
+
+ssl_certificate /etc/nginx/ssl/1_cqep.net_bundle.crt;
+ssl_certificate_key /etc/nginx/ssl/2_cqep.net.key;
+
+# Add headers to serve security related headers
+# Before enabling Strict-Transport-Security headers please read into this
+# topic first.
+#add_header Strict-Transport-Security &quot;max-age=15768000; includeSubDomains; preload;&quot; always;
+#
+# WARNING: Only add the preload option once you read about
+# the consequences in https://hstspreload.org/. This option
+# will add the domain to a hardcoded list that is shipped
+# in all major browsers and getting removed from this list
+# could take several months.
+add_header Referrer-Policy &quot;no-referrer&quot; always;
+add_header X-Content-Type-Options &quot;nosniff&quot; always;
+add_header X-Download-Options &quot;noopen&quot; always;
+add_header X-Frame-Options &quot;SAMEORIGIN&quot; always;
+add_header X-Permitted-Cross-Domain-Policies &quot;none&quot; always;
+add_header X-Robots-Tag &quot;none&quot; always;
+add_header X-XSS-Protection &quot;1; mode=block&quot; always;
+
+# Remove X-Powered-By, which is an information leak
+fastcgi_hide_header X-Powered-By;
+
+# Path to the root of your installation
+root /var/www/nextcloud;
+
+location = /robots.txt {
+    allow all;
+    log_not_found off;
+    access_log off;
+}
+
+# The following 2 rules are only needed for the user_webfinger app.
+# Uncomment it if you&apos;re planning to use this app.
+#rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+#rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json last;
+
+# The following rule is only needed for the Social app.
+# Uncomment it if you&apos;re planning to use this app.
+#rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
+
+location = /.well-known/carddav {
+  return 301 $scheme://$host:$server_port/remote.php/dav;
+}
+location = /.well-known/caldav {
+  return 301 $scheme://$host:$server_port/remote.php/dav;
+}
+
+# set max upload size
+client_max_body_size 512M;
+fastcgi_buffers 64 4K;
+
+# Enable gzip but do not remove ETag headers
+gzip on;
+gzip_vary on;
+gzip_comp_level 4;
+gzip_min_length 256;
+gzip_proxied expired no-cache no-store private no_last_modified no_etag auth;
+gzip_types application/atom+xml application/javascript application/json application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy;
+
+# Uncomment if your server is build with the ngx_pagespeed module
+# This module is currently not supported.
+#pagespeed off;
+
+location / {
+    rewrite ^ /index.php$request_uri;
+}
+
+location ~ ^\/(?:build|tests|config|lib|3rdparty|templates|data)\/ {
+    deny all;
+}
+location ~ ^\/(?:\.|autotest|occ|issue|indie|db_|console) {
+    deny all;
+}
+
+location ~ ^\/(?:index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|oc[ms]-provider\/.+)\.php(?:$|\/) {
+    fastcgi_split_path_info ^(.+?\.php)(\/.*|)$;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_param PATH_INFO $fastcgi_path_info;
+    fastcgi_param HTTPS on;
+    # Avoid sending the security headers twice
+    fastcgi_param modHeadersAvailable true;
+    # Enable pretty urls
+    fastcgi_param front_controller_active true;
+    fastcgi_pass php-handler;
+    fastcgi_intercept_errors on;
+    fastcgi_request_buffering off;
+}
+
+location ~ ^\/(?:updater|oc[ms]-provider)(?:$|\/) {
+    try_files $uri/ =404;
+    index index.php;
+}
+
+# Adding the cache control header for js, css and map files
+# Make sure it is BELOW the PHP block
+location ~ \.(?:css|js|woff2?|svg|gif|map)$ {
+    try_files $uri /index.php$request_uri;
+    add_header Cache-Control &quot;public, max-age=15778463&quot;;
+    # Add headers to serve security related headers (It is intended to
+    # have those duplicated to the ones above)
+    # Before enabling Strict-Transport-Security headers please read into
+    # this topic first.
+    #add_header Strict-Transport-Security &quot;max-age=15768000; includeSubDomains; preload;&quot; always;
+    #
+    # WARNING: Only add the preload option once you read about
+    # the consequences in https://hstspreload.org/. This option
+    # will add the domain to a hardcoded list that is shipped
+    # in all major browsers and getting removed from this list
+    # could take several months.
+    add_header Referrer-Policy &quot;no-referrer&quot; always;
+    add_header X-Content-Type-Options &quot;nosniff&quot; always;
+    add_header X-Download-Options &quot;noopen&quot; always;
+    add_header X-Frame-Options &quot;SAMEORIGIN&quot; always;
+    add_header X-Permitted-Cross-Domain-Policies &quot;none&quot; always;
+    add_header X-Robots-Tag &quot;none&quot; always;
+    add_header X-XSS-Protection &quot;1; mode=block&quot; always;
+
+    # Optional: Don&apos;t log access to assets
+    access_log off;
+}
+
+location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
+    try_files $uri /index.php$request_uri;
+    # Optional: Don&apos;t log access to other assets
+    access_log off;
+}
+}</code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>开始使用ubuntu</title>
+    <url>/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/</url>
+    <content><![CDATA[<h1><span id="开始使用ubuntu">开始使用ubuntu</span></h1><h2><span id="1环境准备">1.环境准备</span></h2><p>安装ubuntu,安装常用软件，配置网络，修复问题等</p>
+<h3><span id="11安装ubuntu">1.1安装ubuntu</span></h3><p>推荐安装ubuntu19.04，安装时不选择更新。 设置启动选择时间为0</p>
+<p><code>sudo vim /boot/grub/grub.cfg</code> 设置timeout=30 =&gt; 0</p>
+<h3><span id="12-安装常用软件">1.2 安装常用软件</span></h3><h4><span id="a安装搜狗输入法">a.安装搜狗输入法</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install fcitx-table-wbpy fcitx-config-gtk</span><br><span class="line">im-config -n fcitx</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br><span class="line">sudo apt-get install -f</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br></pre></td></tr></table></figure>
+
+<p>解决输入法输入英语字符变宽问题，解决如下：将全改为半即可。</p>
+<p><img src="https://cqep.net:88/s/7HBPbkFSjQkMxs2/preview" alt></p>
+<h4><span id="b-优化桌面">b .优化桌面</span></h4><p>安装优化软件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
+
+<p>使用firefox访问 <code>https://extensions.gnome.org/</code> 根据提示安装插件，然后安装两个插件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dash to dock</span><br><span class="line">hide top bar</span><br></pre></td></tr></table></figure>
+
+<h4><span id="c-user-themes设置">c. user themes设置</span></h4><p>在优化里设置user themes 开启 <strong>安装shell Flat Remix</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:daniruiz&#x2F;flat-remix</span><br><span class="line">sudo apt-get install flat-remix</span><br><span class="line">sudo apt-get install flat-remix-gnome</span><br></pre></td></tr></table></figure>
+
+<p><strong>安装图标</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:papirus&#x2F;papirus</span><br><span class="line">sudo apt install papirus-icon-theme</span><br></pre></td></tr></table></figure>
+
+<p>最后在优化中设置主题和图标</p>
+<h4><span id="d-安装wps">d. 安装wps</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo cp  * &#x2F;usr&#x2F;share&#x2F;fonts&#x2F;win10</span><br><span class="line"># 生成字体索引信息</span><br><span class="line">sudo mkfontscale</span><br><span class="line">sudo mkfontdir</span><br><span class="line"># 更新字体缓存</span><br><span class="line">sudo fc-cache</span><br><span class="line">sudo dpkg -i wps-office_11.1.0.8372_amd64.deb</span><br><span class="line">sudo mv wps_symbol_fonts &#x2F;usr&#x2F;share&#x2F;fonts&#x2F; #移动到fonts文件夹</span><br></pre></td></tr></table></figure>
+
+<h4><span id="e安装视频播放器vlc-截图软件shutter">e.安装视频播放器vlc、截图软件shutter</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install vlc</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></table></figure>
+
+<h3><span id="3升级安装游戏下载软件">3.升级安装游戏，下载软件</span></h3><h4><span id="安装ugetaria2">安装uget+aria2</span></h4><p>1.安装aira2</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install aria2</span><br></pre></td></tr></table></figure>
+
+<p>2.安装及配置uget</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install uget</span><br></pre></td></tr></table></figure>
+
+<p>3.chrome安装插件uGet Integration 4.系统也要安装uget-integrator</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:uget-team&#x2F;ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install uget-integrator</span><br></pre></td></tr></table></figure>
+
+<h4><span id="4其他">4.其他</span></h4><ul>
+<li><p>翻墙</p>
+<p>这里使用v2ray,和图形化界面Qv2ray。见nextcloud。</p>
+<p>ufw地址，<a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt" target="_blank" rel="noopener">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</a></p>
+</li>
+<li><p>系统备份</p>
+<p>ubuntu系统镜像软件 systemback，<a href="https://ywnz.com/linuxjc/3877.html" target="_blank" rel="noopener">https://ywnz.com/linuxjc/3877.html</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository &quot;deb http:&#x2F;&#x2F;ppa.launchpad.net&#x2F;nemh&#x2F;systemback&#x2F;ubuntu xenial main&quot;</span><br><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys </span><br><span class="line">382003C2C8B7B4AB813E915B14E4942973C62A1B</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install systemback</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装picgo</p>
+<p>下载最新版本<a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">picgo</a>,安装nodejs和npm、xclip</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install nodejs</span><br><span class="line">sudo apt install npm</span><br><span class="line">sudo apt install xclip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开机启动</p>
+<p>gnome-session-properties,配置开机启动项目</p>
+<p><img src="https://cqep.net:88/s/bjbdQAon7irfsGq/preview" alt></p>
+<p>ubuntu做windows镜像</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard&#x2F;webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get woeusb</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+</search>
