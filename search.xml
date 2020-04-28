@@ -1,100 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>wordpress搭建个人博客</title>
-    <url>/2020/04/27/wordpress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<p>最近被封闭太无聊了，开始折腾些以前想折腾又没时间折腾的东西。折腾完之后发现可能对各网友有一定帮助，然后就有了这篇搭建个人博客。开始分享一些自己在折腾，和曾经折腾过的东西。</p>
+    <title>python生成器的再学习</title>
+    <url>/2020/04/28/python%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>普通的斐波拉契函数</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        print b</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">    return &#39;done&#39;</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
 
-<h4><span id="一-选择博客平台">一、选择博客平台</span></h4><p>看了下现在比较火的一些平台，比如简书、知乎、CSDN等等，个人感觉界面过于复杂，很不适合我这种小白上手，主要是复杂的界面看着自己也很心烦。然后就百度了一下找到了wordpress.com，界面我还挺喜欢，但是每月至少需要4块钱，觉得完全每月必要，正好之前买了华为云的云主机，干脆就自己搭建得了。</p>
-<h4><span id="二-在华为云上安装wordpress">二、在华为云上安装wordpress</span></h4><p>1.安装docker</p>
-<p>使用docker安装简单，并且随时可以启停，相当方便。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">yum-config-manager --add-repo https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br><span class="line">yum install docker-ce</span><br><span class="line"># 启动Docker</span><br><span class="line">systemctl start docker</span><br><span class="line">#测试运行 hello-world</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+<p>改成生成器generator形式只需将print改为yield.</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(max)</span>:</span></span><br><span class="line">    n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; max:</span><br><span class="line">        <span class="keyword">yield</span> b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'done'</span></span><br></pre></td></tr></table></figure>
 
-<p>2.安装mysql</p>
-<p>wordpress部署需要msql，这里同样用docker进行安装</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 安装，其中passwd是你root账户的密码</span><br><span class="line">docker run --name&#x3D;nextcloud_db -e MYSQL_ROOT_PASSWORD&#x3D;passwd -d mysql:5</span><br><span class="line"># 创建数据库</span><br><span class="line">docker exec -it nextcloud_db mysql -u root -p</span><br><span class="line">passwd: passwd</span><br><span class="line">mysql&gt; CREATE DATABASE wordpress;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure>
+<p>然后输出方面，可以直接next进行输出，如：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = fib(<span class="number">10</span>)</span><br><span class="line">next(f)</span><br><span class="line">next(f)</span><br></pre></td></tr></table></figure>
 
-<p>3.安装wordpress</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 82为你对外的服务器端口，nextcloud_db就是我们创建的mysql容器在wordpress里可以通过db访问</span><br><span class="line">docker run --name my-wordpress --link nextcloud_db:db -p 82:80 -d wordpress</span><br></pre></td></tr></table></figure>
+<p>或者使用for循环：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = fib(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> f :</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
 
-<p>4.设置wordpress</p>
-<ul>
-<li><p>选择语言，中文</p>
-<p><img src="https://cqep.net:88/s/EgAQNeMNjBsikNF/preview" alt="img"></p>
-</li>
-<li><p>配置数据库信息，passwd为你的数据库密码</p>
-<p><img src="https://cqep.net:88/s/ScDarbNXRPKRXYq/preview" alt="img"></p>
-</li>
-</ul>
-<h4><span id="三-wordpress优化">三、wordpress优化</span></h4><ul>
-<li><p>最后根据个人喜好进行wordpress页面的一些优化，选择主题，安装插件等。</p>
-<p><img src="https://cqep.net:88/s/YFz7YpoBS3qrCd5/preview" alt="img"></p>
-</li>
-<li><p>$_SERVER[‘HTTPS’] = ‘on’;</p>
-</li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>开始使用ubuntu</title>
-    <url>/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/</url>
-    <content><![CDATA[<h2><span id="1环境准备">1.环境准备</span></h2><p>安装ubuntu,安装常用软件，配置网络，修复问题等</p>
-<h3><span id="11安装ubuntu">1.1安装ubuntu</span></h3><p>推荐安装ubuntu19.04，安装时不选择更新。 设置启动选择时间为0</p>
-<p><code>sudo vim /boot/grub/grub.cfg</code> 设置timeout=30 =&gt; 0</p>
-<a id="more"></a>
+<h4><span id="生产者消费者的协程解法">生产者消费者的协程解法</span></h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">()</span>:</span></span><br><span class="line">    r = <span class="string">''</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        n = <span class="keyword">yield</span> r</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> n:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        print(<span class="string">'[CONSUMER] Consuming %s...'</span> % n)</span><br><span class="line">        r = <span class="string">'200 OK'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">produce</span><span class="params">(c)</span>:</span></span><br><span class="line">    c.send(<span class="literal">None</span>)<span class="comment">#相当于next(),必须先执行</span></span><br><span class="line">    n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; <span class="number">5</span>:</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">        print(<span class="string">'[PRODUCER] Producing %s...'</span> % n)</span><br><span class="line">        r = c.send(n)<span class="comment">#将N的值传到consumer的n值，并将r值回传</span></span><br><span class="line">        print(<span class="string">'[PRODUCER] Consumer return: %s'</span> % r)</span><br><span class="line">    c.close()</span><br><span class="line"></span><br><span class="line">c = consumer()</span><br><span class="line">produce(c)</span><br></pre></td></tr></table></figure>
 
-<h3><span id="12-安装常用软件">1.2 安装常用软件</span></h3><h4><span id="a安装搜狗输入法">a.安装搜狗输入法</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install fcitx-table-wbpy fcitx-config-gtk</span><br><span class="line">im-config -n fcitx</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br><span class="line">sudo apt-get install -f</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br></pre></td></tr></table></figure>
-
-<p>解决输入法输入英语字符变宽问题，解决如下：将全改为半即可。</p>
-<p><img src="https://cqep.net:88/s/7HBPbkFSjQkMxs2/preview" alt></p>
-<h4><span id="b-优化桌面">b .优化桌面</span></h4><p>安装优化软件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
-
-<p>使用firefox访问 <code>https://extensions.gnome.org/</code> 根据提示安装插件，然后安装两个插件</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dash to dock</span><br><span class="line">hide top bar</span><br></pre></td></tr></table></figure>
-
-<h4><span id="c-user-themes设置">c. user themes设置</span></h4><p>在优化里设置user themes 开启 <strong>安装shell Flat Remix</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:daniruiz&#x2F;flat-remix</span><br><span class="line">sudo apt-get install flat-remix</span><br><span class="line">sudo apt-get install flat-remix-gnome</span><br></pre></td></tr></table></figure>
-
-<p><strong>安装图标</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:papirus&#x2F;papirus</span><br><span class="line">sudo apt install papirus-icon-theme</span><br></pre></td></tr></table></figure>
-
-<p>最后在优化中设置主题和图标</p>
-<h4><span id="d-安装wps">d. 安装wps</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo cp  * &#x2F;usr&#x2F;share&#x2F;fonts&#x2F;win10</span><br><span class="line"># 生成字体索引信息</span><br><span class="line">sudo mkfontscale</span><br><span class="line">sudo mkfontdir</span><br><span class="line"># 更新字体缓存</span><br><span class="line">sudo fc-cache</span><br><span class="line">sudo dpkg -i wps-office_11.1.0.8372_amd64.deb</span><br><span class="line">sudo mv wps_symbol_fonts &#x2F;usr&#x2F;share&#x2F;fonts&#x2F; #移动到fonts文件夹</span><br></pre></td></tr></table></figure>
-
-<h4><span id="e安装视频播放器vlc-截图软件shutter">e.安装视频播放器vlc、截图软件shutter</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install vlc</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></table></figure>
-
-<h3><span id="3升级安装游戏下载软件">3.升级安装游戏，下载软件</span></h3><h4><span id="安装ugetaria2">安装uget+aria2</span></h4><p>1.安装aira2</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install aria2</span><br></pre></td></tr></table></figure>
-
-<p>2.安装及配置uget</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install uget</span><br></pre></td></tr></table></figure>
-
-<p>3.chrome安装插件uGet Integration 4.系统也要安装uget-integrator</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:uget-team&#x2F;ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install uget-integrator</span><br></pre></td></tr></table></figure>
-
-<h4><span id="4其他">4.其他</span></h4><ul>
-<li><p>墙</p>
-<p>这里使用v2ray,和图形化界面Qv2ray。见nextcloud。</p>
-<p>ufw地址，<a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt" target="_blank" rel="noopener">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</a></p>
-</li>
-<li><p>系统备份</p>
-<p>ubuntu系统镜像软件 systemback，<a href="https://ywnz.com/linuxjc/3877.html" target="_blank" rel="noopener">https://ywnz.com/linuxjc/3877.html</a></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository &quot;deb http:&#x2F;&#x2F;ppa.launchpad.net&#x2F;nemh&#x2F;systemback&#x2F;ubuntu xenial main&quot;</span><br><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys </span><br><span class="line">382003C2C8B7B4AB813E915B14E4942973C62A1B</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install systemback</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装picgo</p>
-<p>下载最新版本<a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">picgo</a>,安装nodejs和npm、xclip</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install nodejs</span><br><span class="line">sudo apt install npm</span><br><span class="line">sudo apt install xclip</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>开机启动</p>
-<p>gnome-session-properties,配置开机启动项目</p>
-<p><img src="https://cqep.net:88/s/bjbdQAon7irfsGq/preview" alt></p>
-<p>ubuntu做windows镜像</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard&#x2F;webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get woeusb</span><br></pre></td></tr></table></figure>
-
+<p><code>yield</code>在生成器中有中断的功能，可以传出值，也可以从函数外部接收值</p>
 ]]></content>
   </entry>
   <entry>
@@ -221,25 +146,100 @@
 ]]></content>
   </entry>
   <entry>
-    <title>python生成器的再学习</title>
-    <url>/2020/04/28/python%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<p>普通的斐波拉契函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        print b</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">    return &#39;done&#39;</span><br></pre></td></tr></table></figure>
-
+    <title>开始使用ubuntu</title>
+    <url>/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/</url>
+    <content><![CDATA[<h2><span id="1环境准备">1.环境准备</span></h2><p>安装ubuntu,安装常用软件，配置网络，修复问题等</p>
+<h3><span id="11安装ubuntu">1.1安装ubuntu</span></h3><p>推荐安装ubuntu19.04，安装时不选择更新。 设置启动选择时间为0</p>
+<p><code>sudo vim /boot/grub/grub.cfg</code> 设置timeout=30 =&gt; 0</p>
 <a id="more"></a>
 
-<p>改成生成器generator形式只需将print改为yield.</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(max)</span>:</span></span><br><span class="line">    n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; max:</span><br><span class="line">        <span class="keyword">yield</span> b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'done'</span></span><br></pre></td></tr></table></figure>
+<h3><span id="12-安装常用软件">1.2 安装常用软件</span></h3><h4><span id="a安装搜狗输入法">a.安装搜狗输入法</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install fcitx-table-wbpy fcitx-config-gtk</span><br><span class="line">im-config -n fcitx</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br><span class="line">sudo apt-get install -f</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br></pre></td></tr></table></figure>
 
-<p>然后输出方面，可以直接next进行输出，如：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = fib(<span class="number">10</span>)</span><br><span class="line">next(f)</span><br><span class="line">next(f)</span><br></pre></td></tr></table></figure>
+<p>解决输入法输入英语字符变宽问题，解决如下：将全改为半即可。</p>
+<p><img src="https://cqep.net:88/s/7HBPbkFSjQkMxs2/preview" alt></p>
+<h4><span id="b-优化桌面">b .优化桌面</span></h4><p>安装优化软件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install gnome-tweak-tool</span><br></pre></td></tr></table></figure>
 
-<p>或者使用for循环：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = fib(<span class="number">10</span>)</span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> f :</span><br><span class="line">    print(x)</span><br></pre></td></tr></table></figure>
+<p>使用firefox访问 <code>https://extensions.gnome.org/</code> 根据提示安装插件，然后安装两个插件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dash to dock</span><br><span class="line">hide top bar</span><br></pre></td></tr></table></figure>
 
-<h4><span id="生产者消费者的协程解法">生产者消费者的协程解法</span></h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">consumer</span><span class="params">()</span>:</span></span><br><span class="line">    r = <span class="string">''</span></span><br><span class="line">    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">        n = <span class="keyword">yield</span> r</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> n:</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        print(<span class="string">'[CONSUMER] Consuming %s...'</span> % n)</span><br><span class="line">        r = <span class="string">'200 OK'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">produce</span><span class="params">(c)</span>:</span></span><br><span class="line">    c.send(<span class="literal">None</span>)<span class="comment">#相当于next(),必须先执行</span></span><br><span class="line">    n = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; <span class="number">5</span>:</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">        print(<span class="string">'[PRODUCER] Producing %s...'</span> % n)</span><br><span class="line">        r = c.send(n)<span class="comment">#将N的值传到consumer的n值，并将r值回传</span></span><br><span class="line">        print(<span class="string">'[PRODUCER] Consumer return: %s'</span> % r)</span><br><span class="line">    c.close()</span><br><span class="line"></span><br><span class="line">c = consumer()</span><br><span class="line">produce(c)</span><br></pre></td></tr></table></figure>
+<h4><span id="c-user-themes设置">c. user themes设置</span></h4><p>在优化里设置user themes 开启 <strong>安装shell Flat Remix</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:daniruiz&#x2F;flat-remix</span><br><span class="line">sudo apt-get install flat-remix</span><br><span class="line">sudo apt-get install flat-remix-gnome</span><br></pre></td></tr></table></figure>
 
-<p><code>yield</code>在生成器中有中断的功能，可以传出值，也可以从函数外部接收值</p>
+<p><strong>安装图标</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:papirus&#x2F;papirus</span><br><span class="line">sudo apt install papirus-icon-theme</span><br></pre></td></tr></table></figure>
+
+<p>最后在优化中设置主题和图标</p>
+<h4><span id="d-安装wps">d. 安装wps</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo cp  * &#x2F;usr&#x2F;share&#x2F;fonts&#x2F;win10</span><br><span class="line"># 生成字体索引信息</span><br><span class="line">sudo mkfontscale</span><br><span class="line">sudo mkfontdir</span><br><span class="line"># 更新字体缓存</span><br><span class="line">sudo fc-cache</span><br><span class="line">sudo dpkg -i wps-office_11.1.0.8372_amd64.deb</span><br><span class="line">sudo mv wps_symbol_fonts &#x2F;usr&#x2F;share&#x2F;fonts&#x2F; #移动到fonts文件夹</span><br></pre></td></tr></table></figure>
+
+<h4><span id="e安装视频播放器vlc-截图软件shutter">e.安装视频播放器vlc、截图软件shutter</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install vlc</span><br><span class="line">sudo apt install shutter</span><br></pre></td></tr></table></figure>
+
+<h3><span id="3升级安装游戏下载软件">3.升级安装游戏，下载软件</span></h3><h4><span id="安装ugetaria2">安装uget+aria2</span></h4><p>1.安装aira2</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install aria2</span><br></pre></td></tr></table></figure>
+
+<p>2.安装及配置uget</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install uget</span><br></pre></td></tr></table></figure>
+
+<p>3.chrome安装插件uGet Integration 4.系统也要安装uget-integrator</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:uget-team&#x2F;ppa</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install uget-integrator</span><br></pre></td></tr></table></figure>
+
+<h4><span id="4其他">4.其他</span></h4><ul>
+<li><p>墙</p>
+<p>这里使用v2ray,和图形化界面Qv2ray。见nextcloud。</p>
+<p>ufw地址，<a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt" target="_blank" rel="noopener">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</a></p>
+</li>
+<li><p>系统备份</p>
+<p>ubuntu系统镜像软件 systemback，<a href="https://ywnz.com/linuxjc/3877.html" target="_blank" rel="noopener">https://ywnz.com/linuxjc/3877.html</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository &quot;deb http:&#x2F;&#x2F;ppa.launchpad.net&#x2F;nemh&#x2F;systemback&#x2F;ubuntu xenial main&quot;</span><br><span class="line">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys </span><br><span class="line">382003C2C8B7B4AB813E915B14E4942973C62A1B</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install systemback</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装picgo</p>
+<p>下载最新版本<a href="https://github.com/Molunerfinn/PicGo" target="_blank" rel="noopener">picgo</a>,安装nodejs和npm、xclip</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install nodejs</span><br><span class="line">sudo apt install npm</span><br><span class="line">sudo apt install xclip</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开机启动</p>
+<p>gnome-session-properties,配置开机启动项目</p>
+<p><img src="https://cqep.net:88/s/bjbdQAon7irfsGq/preview" alt></p>
+<p>ubuntu做windows镜像</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard&#x2F;webupd8</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade</span><br><span class="line">sudo apt-get woeusb</span><br></pre></td></tr></table></figure>
+
+]]></content>
+  </entry>
+  <entry>
+    <title>wordpress搭建个人博客</title>
+    <url>/2020/04/27/wordpress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
+    <content><![CDATA[<p>最近被封闭太无聊了，开始折腾些以前想折腾又没时间折腾的东西。折腾完之后发现可能对各网友有一定帮助，然后就有了这篇搭建个人博客。开始分享一些自己在折腾，和曾经折腾过的东西。</p>
+<a id="more"></a>
+
+<h4><span id="一-选择博客平台">一、选择博客平台</span></h4><p>看了下现在比较火的一些平台，比如简书、知乎、CSDN等等，个人感觉界面过于复杂，很不适合我这种小白上手，主要是复杂的界面看着自己也很心烦。然后就百度了一下找到了wordpress.com，界面我还挺喜欢，但是每月至少需要4块钱，觉得完全每月必要，正好之前买了华为云的云主机，干脆就自己搭建得了。</p>
+<h4><span id="二-在华为云上安装wordpress">二、在华为云上安装wordpress</span></h4><p>1.安装docker</p>
+<p>使用docker安装简单，并且随时可以启停，相当方便。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 安装</span><br><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line">yum-config-manager --add-repo https:&#x2F;&#x2F;download.docker.com&#x2F;linux&#x2F;centos&#x2F;docker-ce.repo</span><br><span class="line">yum install docker-ce</span><br><span class="line"># 启动Docker</span><br><span class="line">systemctl start docker</span><br><span class="line">#测试运行 hello-world</span><br><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>2.安装mysql</p>
+<p>wordpress部署需要msql，这里同样用docker进行安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 安装，其中passwd是你root账户的密码</span><br><span class="line">docker run --name&#x3D;nextcloud_db -e MYSQL_ROOT_PASSWORD&#x3D;passwd -d mysql:5</span><br><span class="line"># 创建数据库</span><br><span class="line">docker exec -it nextcloud_db mysql -u root -p</span><br><span class="line">passwd: passwd</span><br><span class="line">mysql&gt; CREATE DATABASE wordpress;</span><br><span class="line">mysql&gt; exit;</span><br></pre></td></tr></table></figure>
+
+<p>3.安装wordpress</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 82为你对外的服务器端口，nextcloud_db就是我们创建的mysql容器在wordpress里可以通过db访问</span><br><span class="line">docker run --name my-wordpress --link nextcloud_db:db -p 82:80 -d wordpress</span><br></pre></td></tr></table></figure>
+
+<p>4.设置wordpress</p>
+<ul>
+<li><p>选择语言，中文</p>
+<p><img src="https://cqep.net:88/s/EgAQNeMNjBsikNF/preview" alt="img"></p>
+</li>
+<li><p>配置数据库信息，passwd为你的数据库密码</p>
+<p><img src="https://cqep.net:88/s/ScDarbNXRPKRXYq/preview" alt="img"></p>
+</li>
+</ul>
+<h4><span id="三-wordpress优化">三、wordpress优化</span></h4><ul>
+<li><p>最后根据个人喜好进行wordpress页面的一些优化，选择主题，安装插件等。</p>
+<p><img src="https://cqep.net:88/s/YFz7YpoBS3qrCd5/preview" alt="img"></p>
+</li>
+<li><p>$_SERVER[‘HTTPS’] = ‘on’;</p>
+</li>
+</ul>
 ]]></content>
   </entry>
   <entry>
