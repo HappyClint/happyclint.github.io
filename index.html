@@ -17,13 +17,15 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"c.cqep.net","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"c.cqep.net","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta property="og:type" content="website">
+  <meta name="description" content="水滴穿石，绳锯断金">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Clintme的站点">
 <meta property="og:url" content="http://c.cqep.net/index.html">
 <meta property="og:site_name" content="Clintme的站点">
+<meta property="og:description" content="水滴穿石，绳锯断金">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Clintme">
 <meta name="twitter:card" content="summary">
@@ -186,9 +188,9 @@
     <link itemprop="mainEntityOfPage" href="http://c.cqep.net/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://cqep.net:88/s/W57kdMWeC4ZS4ti/preview">
       <meta itemprop="name" content="Clintme">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="水滴穿石，绳锯断金">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -206,18 +208,26 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2020-04-28 02:40:51" itemprop="dateCreated datePublished" datetime="2020-04-28T02:40:51+08:00">2020-04-28</time>
+              <time title="创建时间：2020-04-28 02:40:51 / 修改时间：13:45:46" itemprop="dateCreated datePublished" datetime="2020-04-28T02:40:51+08:00">2020-04-28</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-04-20 17:58:53" itemprop="dateModified" datetime="2020-04-20T17:58:53+08:00">2020-04-20</time>
-              </span>
 
-          
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span></span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>NaN:aN</span>
+            </span>
 
         </div>
       </header>
@@ -228,69 +238,434 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3><span id="python单线程-多进程-多线程-协程文件写入性能测试">python单线程、多进程、多线程、协程文件写入性能测试</span></h3><p>在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。</p>
-<h4><span id="单线程版">单线程版</span></h4><p>两种数字补全0的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(str(x).zfill(2))</span><br><span class="line">print(&#39;%02d&#39;%x)</span><br></pre></td></tr></table></figure>
+          <p>测试python单线程、多进程、多线程、协程文件写入性能，在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
-<p><img src="https://cqep.net:88/s/bg2pb34rSL9P7xz/preview" alt></p>
-<p>文件读写</p>
-<table>
-<thead>
-<tr>
-<th>访问模式</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>r (read)</td>
-<td>只读模式,不能写（文件必须存在，不存在会报错）</td>
-</tr>
-<tr>
-<td>w (write)</td>
-<td>只写模式,不能读（文件存在则会被覆盖内容（要千万注意），文件不存在则创建）</td>
-</tr>
-<tr>
-<td>a (append)</td>
-<td>追加模式,不能读</td>
-</tr>
-<tr>
-<td>r+</td>
-<td>读写模式</td>
-</tr>
-<tr>
-<td>w+</td>
-<td>写读模式</td>
-</tr>
-<tr>
-<td>a+</td>
-<td>追加读模式</td>
-</tr>
-<tr>
-<td>rb</td>
-<td>二进制读模式</td>
-</tr>
-<tr>
-<td>wb</td>
-<td>二进制写模式</td>
-</tr>
-<tr>
-<td>ab</td>
-<td>二进制追加模式</td>
-</tr>
-<tr>
-<td>rb+</td>
-<td>二进制读写模式</td>
-</tr>
-<tr>
-<td>wb+</td>
-<td>二进制写读模式</td>
-</tr>
-<tr>
-<td>ab+</td>
-<td>二进制追加读模式</td>
-</tr>
-</tbody></table>
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://c.cqep.net/2020/04/28/python%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cqep.net:88/s/W57kdMWeC4ZS4ti/preview">
+      <meta itemprop="name" content="Clintme">
+      <meta itemprop="description" content="水滴穿石，绳锯断金">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clintme的站点">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/python%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">python生成器的再学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-28 02:40:51 / 修改时间：13:45:30" itemprop="dateCreated datePublished" datetime="2020-04-28T02:40:51+08:00">2020-04-28</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span></span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>NaN:aN</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>普通的斐波拉契函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        print b</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">    return &#39;done&#39;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/28/python%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://c.cqep.net/2020/04/28/Hexo+Next%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cqep.net:88/s/W57kdMWeC4ZS4ti/preview">
+      <meta itemprop="name" content="Clintme">
+      <meta itemprop="description" content="水滴穿石，绳锯断金">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clintme的站点">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/Hexo+Next%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/" class="post-title-link" itemprop="url">Hexo+Next主题安装配置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-28 02:40:51 / 修改时间：13:45:10" itemprop="dateCreated datePublished" datetime="2020-04-28T02:40:51+08:00">2020-04-28</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span></span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>NaN:aN</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>之前一直用wordpress，但是对于我这种轻度使用者来说wordpress过于臃肿和复杂，然后发现了Hexo,就被这种简洁的风格所吸引，正式开始使用Hexo。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/28/Hexo+Next%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://c.cqep.net/2020/04/28/Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cqep.net:88/s/W57kdMWeC4ZS4ti/preview">
+      <meta itemprop="name" content="Clintme">
+      <meta itemprop="description" content="水滴穿石，绳锯断金">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clintme的站点">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/28/Git/" class="post-title-link" itemprop="url">Git</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-04-28 02:40:51 / 修改时间：13:45:04" itemprop="dateCreated datePublished" datetime="2020-04-28T02:40:51+08:00">2020-04-28</time>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span></span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>NaN:aN</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="git是什么"><a href="#git是什么" class="headerlink" title="git是什么"></a>git是什么</h4><p>git是分布式版本控制系统，简单来说就是可以记录你的每一次更改。</p>
+<ul>
+<li>集中式控制系统 有服务器，所有用户的资料需要从服务器下载，修改完后再上传。如cvs,svn,<strong>vss</strong>(正在用)</li>
+<li>分布式控制系统 每个用户手中都有完整的资料，可以通过服务器进行分享改动，没有服务器也可以正常运行。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/28/Git/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://c.cqep.net/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cqep.net:88/s/W57kdMWeC4ZS4ti/preview">
+      <meta itemprop="name" content="Clintme">
+      <meta itemprop="description" content="水滴穿石，绳锯断金">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clintme的站点">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/" class="post-title-link" itemprop="url">开始使用ubuntu</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-27 23:21:12" itemprop="dateCreated datePublished" datetime="2020-04-27T23:21:12+08:00">2020-04-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 13:54:21" itemprop="dateModified" datetime="2020-04-28T13:54:21+08:00">2020-04-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span></span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>NaN:aN</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-环境准备"><a href="#1-环境准备" class="headerlink" title="1.环境准备"></a>1.环境准备</h2><p>安装ubuntu,安装常用软件，配置网络，修复问题等</p>
+<h3 id="1-1安装ubuntu"><a href="#1-1安装ubuntu" class="headerlink" title="1.1安装ubuntu"></a>1.1安装ubuntu</h3><p>推荐安装ubuntu19.04，安装时不选择更新。 设置启动选择时间为0</p>
+<p><code>sudo vim /boot/grub/grub.cfg</code> 设置timeout=30 =&gt; 0</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://c.cqep.net/2020/04/27/wordpress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://cqep.net:88/s/W57kdMWeC4ZS4ti/preview">
+      <meta itemprop="name" content="Clintme">
+      <meta itemprop="description" content="水滴穿石，绳锯断金">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Clintme的站点">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/04/27/wordpress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" class="post-title-link" itemprop="url">wordpress搭建个人博客</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-04-27 23:21:12" itemprop="dateCreated datePublished" datetime="2020-04-27T23:21:12+08:00">2020-04-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-04-28 13:45:36" itemprop="dateModified" datetime="2020-04-28T13:45:36+08:00">2020-04-28</time>
+              </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span></span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>NaN:aN</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近被封闭太无聊了，开始折腾些以前想折腾又没时间折腾的东西。折腾完之后发现可能对各网友有一定帮助，然后就有了这篇搭建个人博客。开始分享一些自己在折腾，和曾经折腾过的东西。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/04/27/wordpress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -307,9 +682,6 @@
 
 
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
 
 
 
@@ -366,20 +738,27 @@
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Clintme"
+      src="https://cqep.net:88/s/W57kdMWeC4ZS4ti/preview">
   <p class="site-author-name" itemprop="name">Clintme</p>
-  <div class="site-description" itemprop="description"></div>
+  <div class="site-description" itemprop="description">水滴穿石，绳锯断金</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/yourname" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;yourname" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
 
 
@@ -408,11 +787,23 @@
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Clintme</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+      <span class="post-meta-item-text">站点总字数：</span>
+    <span title="站点总字数">NaNm</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span class="post-meta-item-text">站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">NaN:aN</span>
 </div>
 
 
 <!--
-  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
 -->
 
@@ -459,12 +850,13 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/pisces.js"></script>
+<script src="/js/schemes/muse.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
 
 
+  <script defer src="/lib/three/three.min.js"></script>
 
 
   

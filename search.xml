@@ -3,7 +3,9 @@
   <entry>
     <title>wordpress搭建个人博客</title>
     <url>/2020/04/27/wordpress%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</url>
-    <content><![CDATA[<h3><span id="wordpress搭建个人博客">wordpress搭建个人博客</span></h3><p>最近被封闭太无聊了，开始折腾些以前想折腾又没时间折腾的东西。折腾完之后发现可能对各网友有一定帮助，然后就有了这篇搭建个人博客。开始分享一些自己在折腾，和曾经折腾过的东西。</p>
+    <content><![CDATA[<p>最近被封闭太无聊了，开始折腾些以前想折腾又没时间折腾的东西。折腾完之后发现可能对各网友有一定帮助，然后就有了这篇搭建个人博客。开始分享一些自己在折腾，和曾经折腾过的东西。</p>
+<a id="more"></a>
+
 <h4><span id="一-选择博客平台">一、选择博客平台</span></h4><p>看了下现在比较火的一些平台，比如简书、知乎、CSDN等等，个人感觉界面过于复杂，很不适合我这种小白上手，主要是复杂的界面看着自己也很心烦。然后就百度了一下找到了wordpress.com，界面我还挺喜欢，但是每月至少需要4块钱，觉得完全每月必要，正好之前买了华为云的云主机，干脆就自己搭建得了。</p>
 <h4><span id="二-在华为云上安装wordpress">二、在华为云上安装wordpress</span></h4><p>1.安装docker</p>
 <p>使用docker安装简单，并且随时可以启停，相当方便。</p>
@@ -35,152 +37,13 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Nextcloud nginx https设置</title>
-    <url>/2020/04/27/Nextcloud%20nginx%20https%E8%AE%BE%E7%BD%AE/</url>
-    <content><![CDATA[<p>upstream php-handler {<br>    server 127.0.0.1:9000;<br>    #server unix:/var/run/php/php7.2-fpm.sock;<br>}</p>
-<p>server {<br>    listen 80;<br>    listen [::]:80;<br>    server_name cqep.net;<br>    # enforce https<br>​    return 301 https://$server_name:443$request_uri;<br>}</p>
-<p>server {<br>    listen 443 ssl http2;<br>    listen [::]:443 ssl http2;<br>    server_name cqep.net;</p>
-<pre><code># Use Mozilla&apos;s guidelines for SSL/TLS settings
-# https://mozilla.github.io/server-side-tls/ssl-config-generator/
-# NOTE: some settings below might be redundant
-
-ssl_certificate /etc/nginx/ssl/1_cqep.net_bundle.crt;
-ssl_certificate_key /etc/nginx/ssl/2_cqep.net.key;
-
-# Add headers to serve security related headers
-# Before enabling Strict-Transport-Security headers please read into this
-# topic first.
-#add_header Strict-Transport-Security &quot;max-age=15768000; includeSubDomains; preload;&quot; always;
-#
-# WARNING: Only add the preload option once you read about
-# the consequences in https://hstspreload.org/. This option
-# will add the domain to a hardcoded list that is shipped
-# in all major browsers and getting removed from this list
-# could take several months.
-add_header Referrer-Policy &quot;no-referrer&quot; always;
-add_header X-Content-Type-Options &quot;nosniff&quot; always;
-add_header X-Download-Options &quot;noopen&quot; always;
-add_header X-Frame-Options &quot;SAMEORIGIN&quot; always;
-add_header X-Permitted-Cross-Domain-Policies &quot;none&quot; always;
-add_header X-Robots-Tag &quot;none&quot; always;
-add_header X-XSS-Protection &quot;1; mode=block&quot; always;
-
-# Remove X-Powered-By, which is an information leak
-fastcgi_hide_header X-Powered-By;
-
-# Path to the root of your installation
-root /var/www/nextcloud;
-
-location = /robots.txt {
-    allow all;
-    log_not_found off;
-    access_log off;
-}
-
-# The following 2 rules are only needed for the user_webfinger app.
-# Uncomment it if you&apos;re planning to use this app.
-#rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
-#rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json last;
-
-# The following rule is only needed for the Social app.
-# Uncomment it if you&apos;re planning to use this app.
-#rewrite ^/.well-known/webfinger /public.php?service=webfinger last;
-
-location = /.well-known/carddav {
-  return 301 $scheme://$host:$server_port/remote.php/dav;
-}
-location = /.well-known/caldav {
-  return 301 $scheme://$host:$server_port/remote.php/dav;
-}
-
-# set max upload size
-client_max_body_size 512M;
-fastcgi_buffers 64 4K;
-
-# Enable gzip but do not remove ETag headers
-gzip on;
-gzip_vary on;
-gzip_comp_level 4;
-gzip_min_length 256;
-gzip_proxied expired no-cache no-store private no_last_modified no_etag auth;
-gzip_types application/atom+xml application/javascript application/json application/ld+json application/manifest+json application/rss+xml application/vnd.geo+json application/vnd.ms-fontobject application/x-font-ttf application/x-web-app-manifest+json application/xhtml+xml application/xml font/opentype image/bmp image/svg+xml image/x-icon text/cache-manifest text/css text/plain text/vcard text/vnd.rim.location.xloc text/vtt text/x-component text/x-cross-domain-policy;
-
-# Uncomment if your server is build with the ngx_pagespeed module
-# This module is currently not supported.
-#pagespeed off;
-
-location / {
-    rewrite ^ /index.php$request_uri;
-}
-
-location ~ ^\/(?:build|tests|config|lib|3rdparty|templates|data)\/ {
-    deny all;
-}
-location ~ ^\/(?:\.|autotest|occ|issue|indie|db_|console) {
-    deny all;
-}
-
-location ~ ^\/(?:index|remote|public|cron|core\/ajax\/update|status|ocs\/v[12]|updater\/.+|oc[ms]-provider\/.+)\.php(?:$|\/) {
-    fastcgi_split_path_info ^(.+?\.php)(\/.*|)$;
-    include fastcgi_params;
-    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-    fastcgi_param PATH_INFO $fastcgi_path_info;
-    fastcgi_param HTTPS on;
-    # Avoid sending the security headers twice
-    fastcgi_param modHeadersAvailable true;
-    # Enable pretty urls
-    fastcgi_param front_controller_active true;
-    fastcgi_pass php-handler;
-    fastcgi_intercept_errors on;
-    fastcgi_request_buffering off;
-}
-
-location ~ ^\/(?:updater|oc[ms]-provider)(?:$|\/) {
-    try_files $uri/ =404;
-    index index.php;
-}
-
-# Adding the cache control header for js, css and map files
-# Make sure it is BELOW the PHP block
-location ~ \.(?:css|js|woff2?|svg|gif|map)$ {
-    try_files $uri /index.php$request_uri;
-    add_header Cache-Control &quot;public, max-age=15778463&quot;;
-    # Add headers to serve security related headers (It is intended to
-    # have those duplicated to the ones above)
-    # Before enabling Strict-Transport-Security headers please read into
-    # this topic first.
-    #add_header Strict-Transport-Security &quot;max-age=15768000; includeSubDomains; preload;&quot; always;
-    #
-    # WARNING: Only add the preload option once you read about
-    # the consequences in https://hstspreload.org/. This option
-    # will add the domain to a hardcoded list that is shipped
-    # in all major browsers and getting removed from this list
-    # could take several months.
-    add_header Referrer-Policy &quot;no-referrer&quot; always;
-    add_header X-Content-Type-Options &quot;nosniff&quot; always;
-    add_header X-Download-Options &quot;noopen&quot; always;
-    add_header X-Frame-Options &quot;SAMEORIGIN&quot; always;
-    add_header X-Permitted-Cross-Domain-Policies &quot;none&quot; always;
-    add_header X-Robots-Tag &quot;none&quot; always;
-    add_header X-XSS-Protection &quot;1; mode=block&quot; always;
-
-    # Optional: Don&apos;t log access to assets
-    access_log off;
-}
-
-location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
-    try_files $uri /index.php$request_uri;
-    # Optional: Don&apos;t log access to other assets
-    access_log off;
-}
-}</code></pre>]]></content>
-  </entry>
-  <entry>
     <title>开始使用ubuntu</title>
     <url>/2020/04/27/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8ubuntu/</url>
-    <content><![CDATA[<h1><span id="开始使用ubuntu">开始使用ubuntu</span></h1><h2><span id="1环境准备">1.环境准备</span></h2><p>安装ubuntu,安装常用软件，配置网络，修复问题等</p>
+    <content><![CDATA[<h2><span id="1环境准备">1.环境准备</span></h2><p>安装ubuntu,安装常用软件，配置网络，修复问题等</p>
 <h3><span id="11安装ubuntu">1.1安装ubuntu</span></h3><p>推荐安装ubuntu19.04，安装时不选择更新。 设置启动选择时间为0</p>
 <p><code>sudo vim /boot/grub/grub.cfg</code> 设置timeout=30 =&gt; 0</p>
+<a id="more"></a>
+
 <h3><span id="12-安装常用软件">1.2 安装常用软件</span></h3><h4><span id="a安装搜狗输入法">a.安装搜狗输入法</span></h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo apt install fcitx-table-wbpy fcitx-config-gtk</span><br><span class="line">im-config -n fcitx</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br><span class="line">sudo apt-get install -f</span><br><span class="line">sudo dpkg -i sogoupinyin_2.2.0.0108_amd64.deb</span><br></pre></td></tr></table></figure>
 
 <p>解决输入法输入英语字符变宽问题，解决如下：将全改为半即可。</p>
@@ -237,11 +100,13 @@ location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
   <entry>
     <title>Git</title>
     <url>/2020/04/28/Git/</url>
-    <content><![CDATA[<h3><span id="git">Git</span></h3><h4><span id="git是什么">git是什么</span></h4><p>git是分布式版本控制系统，简单来说就是可以记录你的每一次更改。</p>
+    <content><![CDATA[<h4><span id="git是什么">git是什么</span></h4><p>git是分布式版本控制系统，简单来说就是可以记录你的每一次更改。</p>
 <ul>
 <li>集中式控制系统 有服务器，所有用户的资料需要从服务器下载，修改完后再上传。如cvs,svn,<strong>vss</strong>(正在用)</li>
 <li>分布式控制系统 每个用户手中都有完整的资料，可以通过服务器进行分享改动，没有服务器也可以正常运行。</li>
 </ul>
+<a id="more"></a>
+
 <h4><span id="git安装">git安装</span></h4><p><a href="https://git-scm.com/download/" target="_blank" rel="noopener">下载地址</a>,配置如下：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
 
@@ -283,46 +148,11 @@ location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
 ]]></content>
   </entry>
   <entry>
-    <title>JavaScript入门</title>
-    <url>/2020/04/28/JavaScript%E5%85%A5%E9%97%A8/</url>
-    <content><![CDATA[<h3><span id="javascript入门">JavaScript入门</span></h3><p>####　快速入门</p>
-<ol>
-<li><p>JavaScipt可以放在网页的任何地方，不过通常放在<head>里，用<script>框起来一般看起来像这种：</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">    alert(<span class="string">'Hello, world'</span>);</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>第二种是引入一个写好的js文件</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/static/js/abc.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>这样做的好处是多个页面可以引用同一个js文件，很方便。</p>
-</li>
-<li><p>调试</p>
-<p>谷歌浏览器使用调试（F12）,在console中可以执行js命令。如图所示：</p>
-<p><img src="https://cqep.net:88/s/8Pez4TjTP9XJDss/preview" alt=""></p>
-</li>
-</ol>
-<h4 id="JavaScript语法"><a href="#JavaScript语法" class="headerlink" title="JavaScript语法"></a>JavaScript语法</h4><ol>
-<li><p>约定俗成的一些用法</p>
-<ul>
-<li>每句以;结尾</li>
-<li>语句块用{...}</li>
-<li>缩进使用4个空格</li>
-</ul>
-</li>
-<li><p>注释</p>
-<ul>
-<li><p>使用 //注释一行</p>
-</li>
-<li><p>使用<code>/*...*/</code>注释多行</p>
-</li>
-</ul>
-</li>
-</ol>
-</script></head></p></li></ol>]]></content>
-  </entry>
-  <entry>
     <title>Hexo+Next主题安装配置</title>
     <url>/2020/04/28/Hexo+Next%E4%B8%BB%E9%A2%98%E5%AE%89%E8%A3%85%E9%85%8D%E7%BD%AE/</url>
-    <content><![CDATA[<h3><span id="hexonext主题安装配置">Hexo+Next主题安装配置</span></h3><p>之前一直用wordpress，但是对于我这种轻度使用者来说wordpress过于臃肿和复杂，然后发现了Hexo,就被这种简洁的风格所吸引，正式开始使用Hexo。</p>
+    <content><![CDATA[<p>之前一直用wordpress，但是对于我这种轻度使用者来说wordpress过于臃肿和复杂，然后发现了Hexo,就被这种简洁的风格所吸引，正式开始使用Hexo。</p>
+<a id="more"></a>
+
 <h4><span id="安装hexo">安装Hexo</span></h4><ol>
 <li><p><a href="https://links.jianshu.com/go?to=https%3A%2F%2Fgit-scm.com%2Fdownload%2Fwin" target="_blank" rel="noopener">安装git</a></p>
 </li>
@@ -391,47 +221,12 @@ location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
 ]]></content>
   </entry>
   <entry>
-    <title>Markdown编辑器同步</title>
-    <url>/2020/04/28/Markdown%E7%BC%96%E8%BE%91%E5%99%A8%E5%90%8C%E6%AD%A5/</url>
-    <content><![CDATA[<h2><span id="1-提提需求">1、提提需求</span></h2><p>其实就是说说自己遇到的情况。自己并非一个专业的博主或Steemer之类的，自己的写作都是用碎片化的时候进行了，所以就有了这样的特殊要求。</p>
-<ul>
-<li><p>公司电脑上有时会写上几句</p>
-</li>
-<li><p>写了没几句就开会去了，或回家等车时间，手机上会写上几句</p>
-</li>
-<li><p>回家后又有两台电脑，不知会有哪台上写</p>
-</li>
-</ul>
-<p>其实说白了就是打通Android+Windows平台。</p>
-<p><strong>注：本文使用的方法中Typora支持Linux和Mac，坚果云全平台支持，易码只支持Android。</strong></p>
-<h2><span id="2-完美的markdown编辑器typora">2、完美的Markdown编辑器：Typora</span></h2><p>之前其实也用过一种解决方案，也基本可行。但是就是桌面版的编辑器和Typora的体验相差太远了，不得不放弃了。</p>
-<p>Typora真是最好用的Markdown编辑器，对我来说没有之一。具体使用方法我就不细说了，可以参照：[给大家推荐一款无可挑剔的 Markdown 编辑器]。</p>
-<p>补充一点自己发现的一个小功能，添加本地图片的功能：</p>
-<p><img src="assets/1571326204804.png" alt="1571326204804"> 为了就合这个编辑器，所以才想办法打通手机和桌面。</p>
-<h2><span id="3-无可挑剔的手机markdown笔记本易码">3、无可挑剔的手机Markdown笔记本：易码</span></h2><p>可能由于这个软件并没有大公司的推广，所以大家知道的并不多，但实际上这个软件的好用性真的好上天了！！！</p>
-<p>现在的感觉是体验比Typora丝毫不差，而且有几点做的比Typora还好（当然，由于手机的功能限制，也有很多功能不如Typora）。</p>
-<ol>
-<li><p>云同步功能</p>
-<p>易码本身没有云服务器，但他非常开放，给大家来一个截图感受一个: <img src="assets/1571327047559_3a2b64d05ce90b4c6d362339a6c3c108.jpg" alt="A123456.jpg"> 我相信他还在持续的改进当中。</p>
-</li>
-<li><p>图片插入功能</p>
-<p>图片插入功能也和Typora一样好用。在我现在用过的所有的Markdown编辑器中，图片插入都是只插入一个特定的代码，要自己来填写图片名称和图片路径的，而只有易码不是这样做的。在易码中，可以像Word那样选择图片，然后图片会复制到相应的文件夹中。</p>
-<p>使用方法和上面的Typora相同。</p>
-<hr>
-<p>注：本文写的一半的时候发现Typora也有这个功能。</p>
-<h2><span id="4-非常不错的文档同步服务器坚果云">4、非常不错的文档同步服务器：坚果云</span></h2><p>大家很容易就能说出不少非常好用的文档同步服务器。但我作为一个非翻墙爱好者，觉得只有坚果云是最好用的。</p>
-<p>像Dropbox是非常好用+管用，但无奈国内很不和啊，像什么Google Drive就更不用说了。除了这些之外，一般都是需要使用他们的客户端的，像坚果云这样支持WebDev的很少。</p>
-<p>免费的坚果云每月只有1G的上传流量和3G的下载流量。是很少，但对于写作来说非常足够了。</p>
-<p>两方的设置都很简单，电脑上直接安装他的客户端就可以了，这样就能几乎实时同步了。 <img src="assets/1518309369493_3294bb15bbd6e9d975d9d77f3196cd66.gif" alt="1518309369493_3294bb15bbd6e9d975d9d77f3196cd66.gif"></p>
-</li>
-</ol>
-]]></content>
-  </entry>
-  <entry>
     <title>python生成器的再学习</title>
     <url>/2020/04/28/python%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h4><span id="python生成器的再学习">python生成器的再学习</span></h4><p>普通的斐波拉契函数</p>
+    <content><![CDATA[<p>普通的斐波拉契函数</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">def fib(max):</span><br><span class="line">    n, a, b &#x3D; 0, 0, 1</span><br><span class="line">    while n &lt; max:</span><br><span class="line">        print b</span><br><span class="line">        a, b &#x3D; b, a + b</span><br><span class="line">        n &#x3D; n + 1</span><br><span class="line">    return &#39;done&#39;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
 
 <p>改成生成器generator形式只需将print改为yield.</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(max)</span>:</span></span><br><span class="line">    n, a, b = <span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span></span><br><span class="line">    <span class="keyword">while</span> n &lt; max:</span><br><span class="line">        <span class="keyword">yield</span> b</span><br><span class="line">        a, b = b, a + b</span><br><span class="line">        n = n + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'done'</span></span><br></pre></td></tr></table></figure>
@@ -448,27 +243,11 @@ location ~ \.(?:png|html|ttf|ico|jpg|jpeg|bcmap)$ {
 ]]></content>
   </entry>
   <entry>
-    <title>markdown使用</title>
-    <url>/2020/04/28/markdown%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h1><span id="markdown使用">markdown使用</span></h1><h3><span id="1标题">1.标题</span></h3><h1><span id="一级标题">一级标题</span></h1><h2><span id="二级标题">二级标题</span></h2><h3><span id="三级标题">三级标题</span></h3><h4><span id="四级标题">四级标题</span></h4><h5><span id="五级标题">五级标题</span></h5><h2><span id="2缩进">2.缩进</span></h2><p>未缩进</p>
-<p> 空格缩进四分之一格</p>
-<p>​    tab缩进1格</p>
-<h2><span id="3代码块">3.代码块</span></h2><p>未使用代码块</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">使用代码块</span><br><span class="line">print(<span class="string">'hello'</span>)</span><br><span class="line">还可以选择语言</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">快捷键 ctrl+shift+k</span><br></pre></td></tr></table></figure>
-
-
-<h2><span id="4图片插入">4.图片插入</span></h2><p>ctrl+shift+I</p>
-<p><img src alt></p>
-<h2><span id="5序号">5.序号</span></h2><p>1.数字标号</p>
-<p>a.字母标号</p>
-]]></content>
-  </entry>
-  <entry>
     <title>多进程、多线程、协程解压文件速度对比</title>
     <url>/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/</url>
-    <content><![CDATA[<h3><span id="python单线程-多进程-多线程-协程文件写入性能测试">python单线程、多进程、多线程、协程文件写入性能测试</span></h3><p>在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。</p>
+    <content><![CDATA[<p>测试python单线程、多进程、多线程、协程文件写入性能，在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。</p>
+<a id="more"></a>
+
 <h4><span id="单线程版">单线程版</span></h4><p>两种数字补全0的方法</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">print(str(x).zfill(2))</span><br><span class="line">print(&#39;%02d&#39;%x)</span><br></pre></td></tr></table></figure>
 
