@@ -65,6 +65,19 @@
 <p><img src="https://cqep.net:88/s/bkHtTsJTfkRkYda/preview" alt></p>
 <p>目前数据不准确，不知道部署到网站会不会这样。</p>
 </li>
+<li><p>添加几何背景效果</p>
+<p>进入next主题文件夹</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cd themes&#x2F;next</span><br></pre></td></tr></table></figure>
+
+<p>git拉取</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git clone https:&#x2F;&#x2F;github.com&#x2F;theme-next&#x2F;theme-next-canvas-nest source&#x2F;lib&#x2F;canvas-nest</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>写入next配置文件</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">canvas_nest:</span><br><span class="line">  enable: true</span><br><span class="line">  onmobile: true # display on mobile or not</span><br><span class="line">  color: &#39;0,0,255&#39; # RGB values, use &#39;,&#39; to separate</span><br><span class="line">  opacity: 0.5 # the opacity of line: 0~1</span><br><span class="line">  zIndex: -1 # z-index property of the background</span><br><span class="line">  count: 99 # the number of lines</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
 </ul>
 </li>
 </ol>
