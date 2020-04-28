@@ -20,21 +20,17 @@
     var CONFIG = {"hostname":"c.cqep.net","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"hide","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"flat"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="测试python单线程、多进程、多线程、协程文件写入性能，在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="多进程、多线程、协程解压文件速度对比">
-<meta property="og:url" content="http://c.cqep.net/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/index.html">
+  <meta name="description" content="水滴穿石，绳锯断金">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Clintme的站点">
+<meta property="og:url" content="http://c.cqep.net/categories/github/index.html">
 <meta property="og:site_name" content="Clintme的站点">
-<meta property="og:description" content="测试python单线程、多进程、多线程、协程文件写入性能，在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。">
+<meta property="og:description" content="水滴穿石，绳锯断金">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cqep.net:88/s/bg2pb34rSL9P7xz/preview">
-<meta property="article:published_time" content="2020-04-27T18:40:51.406Z">
-<meta property="article:modified_time" content="2020-04-28T10:53:26.205Z">
 <meta property="article:author" content="Clintme">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cqep.net:88/s/bg2pb34rSL9P7xz/preview">
 
-<link rel="canonical" href="http://c.cqep.net/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/">
+<link rel="canonical" href="http://c.cqep.net/categories/github/">
 
 
 <script id="page-configurations">
@@ -42,12 +38,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>多进程、多线程、协程解压文件速度对比 | Clintme的站点</title>
+  <title>分类: github | Clintme的站点</title>
   
 
 
@@ -183,170 +179,51 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content category">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://c.cqep.net/2020/04/28/%E5%A4%9A%E8%BF%9B%E7%A8%8B%E3%80%81%E5%A4%9A%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%E8%A7%A3%E5%8E%8B%E6%96%87%E4%BB%B6%E9%80%9F%E5%BA%A6%E5%AF%B9%E6%AF%94/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://cqep.net:88/s/W57kdMWeC4ZS4ti/preview">
-      <meta itemprop="name" content="Clintme">
-      <meta itemprop="description" content="水滴穿石，绳锯断金">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Clintme的站点">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          多进程、多线程、协程解压文件速度对比
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-04-28 02:40:51 / 修改时间：18:53:26" itemprop="dateCreated datePublished" datetime="2020-04-28T02:40:51+08:00">2020-04-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-            </span>
-
-          
-            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span id="busuanzi_value_page_pv"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>298</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">github
+          <small>分类</small>
+        </h2>
+      </div>
 
       
-        <p>测试python单线程、多进程、多线程、协程文件写入性能，在文件中写入50万行数据，写入10次，查看性能占用和耗时情况。</p>
-<a id="more"></a>
-
-<h4><span id="单线程版">单线程版</span></h4><p>两种数字补全0的方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print(str(x).zfill(2))</span><br><span class="line">print(&#39;%02d&#39;%x)</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://cqep.net:88/s/bg2pb34rSL9P7xz/preview" alt></p>
-<p>文件读写</p>
-<table>
-<thead>
-<tr>
-<th>访问模式</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>r (read)</td>
-<td>只读模式,不能写（文件必须存在，不存在会报错）</td>
-</tr>
-<tr>
-<td>w (write)</td>
-<td>只写模式,不能读（文件存在则会被覆盖内容（要千万注意），文件不存在则创建）</td>
-</tr>
-<tr>
-<td>a (append)</td>
-<td>追加模式,不能读</td>
-</tr>
-<tr>
-<td>r+</td>
-<td>读写模式</td>
-</tr>
-<tr>
-<td>w+</td>
-<td>写读模式</td>
-</tr>
-<tr>
-<td>a+</td>
-<td>追加读模式</td>
-</tr>
-<tr>
-<td>rb</td>
-<td>二进制读模式</td>
-</tr>
-<tr>
-<td>wb</td>
-<td>二进制写模式</td>
-</tr>
-<tr>
-<td>ab</td>
-<td>二进制追加模式</td>
-</tr>
-<tr>
-<td>rb+</td>
-<td>二进制读写模式</td>
-</tr>
-<tr>
-<td>wb+</td>
-<td>二进制写读模式</td>
-</tr>
-<tr>
-<td>ab+</td>
-<td>二进制追加读模式</td>
-</tr>
-</tbody></table>
-
+    <div class="collection-year">
+      <span class="collection-header">2020</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2020-04-28T02:40:51+08:00"
+              content="2020-04-28">
+          04-28
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2020/04/28/Git/" itemprop="url">
+            <span itemprop="name">Git</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/04/28/python%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E5%86%8D%E5%AD%A6%E4%B9%A0/" rel="prev" title="python生成器的再学习">
-      <i class="fa fa-chevron-left"></i> python生成器的再学习
-    </a></div>
-      <div class="post-nav-item"></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
@@ -399,7 +276,6 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">单线程版</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
